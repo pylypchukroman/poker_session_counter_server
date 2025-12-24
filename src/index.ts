@@ -14,11 +14,10 @@ app.use(cors({
 }));
 
 const db: Db = await connectDB();
-const collection = await db.collection("balance").find().toArray();
-console.log(collection)
 
-app.get("/balance", (req, res) => {
-  res.status(200).json(pokerRooms);
+app.get("/api/balance", async (req, res) => {
+  const collection = await db.collection("balance").findOne({});
+  res.status(200).json(collection);
 });
 
 app.listen(PORT, () => {
