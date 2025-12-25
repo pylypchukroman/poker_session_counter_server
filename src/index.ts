@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { pokerRooms } from './data/rooms.js';
+import { balanceRouter } from "./routes/balance.ts"
 import { Db } from 'mongodb';
 import { connectDB } from './db/db.ts';
 
@@ -15,10 +15,7 @@ app.use(cors({
 
 const db: Db = await connectDB();
 
-app.get("/api/balance", async (req, res) => {
-  const collection = await db.collection("balance").findOne({});
-  res.status(200).json(collection);
-});
+app.use('/api/balance', balanceRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
