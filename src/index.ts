@@ -1,21 +1,21 @@
 import express from "express";
 import cors from "cors";
-import { balanceRouter } from "./routes/balance.ts"
-import { Db } from 'mongodb';
-import { connectDB } from './db/db.ts';
+import { balancesRouter } from "./routes/api/balances/balances.ts"
+import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions.ts';
+import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions.ts';
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+app.use(cors());
 
-const db: Db = await connectDB();
+app.use('/api/balances', balancesRouter);
+app.use('/api/cash-sessions', cashSessionsRouter);
+app.use('/api/tournaments-sessions', tournamentsSessionsRouter);
 
-app.use('/api/balance', balanceRouter)
+app.use((req, res) => {
+  res.status(404).json({massage: "Not found"});
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
