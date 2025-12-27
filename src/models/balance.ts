@@ -4,12 +4,13 @@ import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 const balanceSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Set name for contact'],
+    required: [true, 'Set name for balance'],
   },
   balance: {
     type: Number,
+    required: true
   },
-}, { timestamps: true });
+});
 
 balanceSchema.post("save", handleMongooseError);
 
