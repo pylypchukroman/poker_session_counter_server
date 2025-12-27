@@ -32,6 +32,15 @@ const deleteBalance = async (req, res) => {
     })
 };
 
+const updateBalance = async (req, res) => {
+    const { balanceId } = req.params;
+    const result = await Balance.findByIdAndUpdate(balanceId, req.body, {new: true});
+    if (!result) {
+        throw HttpError(404, "Not Found");
+    }
+    res.json(result);
+};
+
 const editBalance = async (req, res) => {
     const { balanceId } = req.params;
     const result = await Balance.findByIdAndUpdate(balanceId, req.body, {new: true});
@@ -46,5 +55,6 @@ export const balancesController = {
     getById: ctrlWrapper(getById),
     addBalance: ctrlWrapper(addBalance),
     deleteBalance: ctrlWrapper(deleteBalance),
+    updateBalance: ctrlWrapper(updateBalance),
     editBalance: ctrlWrapper(editBalance),
 };
