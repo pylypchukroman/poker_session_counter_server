@@ -1,15 +1,15 @@
-import { Contact } from '../models/balance';
-import { HttpError } from '../helpers/HttpError';
-import { ctrlWrapper } from '../helpers/ctrlWrapper';
+import { Balance } from '../models/balance.ts';
+import { HttpError } from '../helpers/HttpError.ts';
+import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
 
 const getAll = async (req, res) => {
-    const result = await Contact.find();
+    const result = await Balance.find();
     res.json(result);
 };
 
 const getById = async (req, res) => {
     const { balanceId } = req.params;
-    const result = await Contact.findById(balanceId);
+    const result = await Balance.findById(balanceId);
     if (!result) {
         throw HttpError(404, "Not Found");
     }
@@ -17,13 +17,13 @@ const getById = async (req, res) => {
 };
 
 const addBalance = async (req, res) => {
-    const result = await Contact.create(req.body);
+    const result = await Balance.create(req.body);
     res.status(201).json(result);
 };
 
 const deleteBalance = async (req, res) => {
     const { balanceId } = req.params;
-    const result = await Contact.findByIdAndDelete(balanceId);
+    const result = await Balance.findByIdAndDelete(balanceId);
     if (!result) {
         throw HttpError(404, "Not Found");
     }
@@ -34,7 +34,7 @@ const deleteBalance = async (req, res) => {
 
 const editBalance = async (req, res) => {
     const { balanceId } = req.params;
-    const result = await Contact.findByIdAndUpdate(balanceId, req.body, {new: true});
+    const result = await Balance.findByIdAndUpdate(balanceId, req.body, {new: true});
     if (!result) {
         throw HttpError(404, "Not Found");
     }

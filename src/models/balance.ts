@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
+import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 
 const balanceSchema = new Schema({
   name: {
@@ -13,4 +13,4 @@ const balanceSchema = new Schema({
 
 balanceSchema.post("save", handleMongooseError);
 
-export const Contact = model("balance", balanceSchema);
+export const Balance = model("balance", balanceSchema);

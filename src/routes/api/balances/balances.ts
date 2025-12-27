@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { balancesController } from '../../../controllers/balances';
-import { isValidId } from '../../../middlewares/isValid';
-import { validateBody } from '../../../middlewares/validateBody';
-import { balanceSchema } from '../../../schemas/balanceSchema';
+import { isValidId } from '../../../middlewares/isValid.ts';
+import { validateBody } from '../../../middlewares/validateBody.ts';
+import { balanceSchema } from '../../../schemas/balanceSchema.ts';
+import { balancesController } from '../../../controllers/balances.ts';
 
 export const balanceRouter = Router();
 
