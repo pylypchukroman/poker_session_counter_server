@@ -1,11 +1,17 @@
-import { Db } from 'mongodb';
-import { connectDB } from '../../../db/db.ts';
 import { Router } from "express";
+import { balancesController } from '../../../controllers/balances';
+import { isValidId } from '../../../middlewares/isValid';
+import { validateBody } from '../../../middlewares/validateBody';
+import { balanceSchema } from '../../../schemas/balanceSchema';
 
-const db: Db = await connectDB();
-export const balancesRouter = Router();
+export const balanceRouter = Router();
 
-balancesRouter.get("/", async (req, res) => {
-  const collection = await db.collection("balance").findOne({});
-  res.status(200).json(collection);
-});
+balanceRouter.get('/', balancesController.getAll);
+
+balanceRouter.get('/:balanceId', isValidId, balancesController.getById);
+
+balanceRouter.post('/', validateBody(balanceSchema), balancesController.addBalance);
+
+balanceRouter.delete('/:balanceId',isValidId, balancesController.deleteBalance);
+
+balanceRouter.put('/:balanceId', isValidId, validateBody(balanceSchema), balancesController.editBalance);
