@@ -8,3 +8,11 @@ export const isValidId = (req, res, next) => {
   }
   next();
 };
+
+export const isValidSessionId = (req, res, next) => {
+  const { sessionId } = req.params;
+  if (!isValidObjectId(sessionId)) {
+    next(HttpError(400, `${sessionId} is not valid id`));
+  }
+  next();
+};

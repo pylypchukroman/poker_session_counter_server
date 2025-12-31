@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/balances', balanceRouter);
-app.use('/api/cash-sessions', cashSessionsRouter);
+app.use('/api/cash_sessions', cashSessionsRouter);
 app.use('/api/tournaments-sessions', tournamentsSessionsRouter);
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
