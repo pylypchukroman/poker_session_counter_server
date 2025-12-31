@@ -14,7 +14,7 @@ const getById = async (req, res) => {
     throw HttpError(404, "Not Found");
   }
   res.json(result);
-}
+};
 
 const deleteSession = async (req, res) => {
   const { sessionId } = req.params;
@@ -32,9 +32,29 @@ const addSession = async (req, res) => {
   res.status(201).json(result);
 };
 
+const updateSession = async (req, res) => {
+  const { sessionId } = req.params;
+  const result = await CashSessions.findByIdAndUpdate(sessionId, req.body, {new: true});
+  if (!result) {
+    throw HttpError(404, "Not Found");
+  }
+  res.json(result);
+};
+
+const editSession = async (req, res) => {
+  const { sessionId } = req.params;
+  const result = await CashSessions.findByIdAndUpdate(sessionId, req.body, {new: true});
+  if (!result) {
+    throw HttpError(404, "Not Found");
+  }
+  res.json(result);
+};
+
 export const cashSessionsController = {
   getAll: ctrlWrapper(getAll),
   getById: ctrlWrapper(getById),
   deleteSession: ctrlWrapper(deleteSession),
   addSession: ctrlWrapper(addSession),
-}
+  updateSession: ctrlWrapper(updateSession),
+  editSession: ctrlWrapper(editSession)
+};

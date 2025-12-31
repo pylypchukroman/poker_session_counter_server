@@ -36,7 +36,7 @@ const pokerSessionSchema = new Schema<PokerSession>(
     status: {
       type: String,
       enum: ["running", "finished"],
-      default: "running",
+      default: "finished",
     },
     balancesStart: {
       type: [pokerRoomBalanceSchema],
@@ -63,7 +63,6 @@ const pokerSessionSchema = new Schema<PokerSession>(
       },
     },
   }
-
 );
 
 
