@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const pokerRoomBalanceSchema = Joi.object({
-  room: Joi.string().trim().min(1).required(),
+  name: Joi.string().trim().min(1).required(),
   balance: Joi.number().min(0).required(),
 });
 

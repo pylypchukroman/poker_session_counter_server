@@ -2,7 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 
 export interface PokerRoomBalance {
-  room: string;
+  name: string;
   balance: number;
 }
 
@@ -16,7 +16,7 @@ export interface PokerSession extends Document {
 
 const pokerRoomBalanceSchema = new Schema<PokerRoomBalance>(
   {
-    room: { type: String, required: true },
+    name: { type: String, required: true },
     balance: { type: Number, required: true, min: 0 },
   },
   { _id: false }
