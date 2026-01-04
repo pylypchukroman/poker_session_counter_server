@@ -1,7 +1,12 @@
 import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 
-const balanceSchema = new Schema(
+export interface Balance {
+  name: string;
+  balance: number;
+}
+
+const balanceSchema = new Schema<Balance>(
   {
     name: {
       type: String,

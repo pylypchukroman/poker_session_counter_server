@@ -1,13 +1,26 @@
 import { Balance } from '../models/balance.ts';
 import { HttpError } from '../helpers/HttpError.ts';
 import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
+import type { Request, Response } from "express";
 
-const getAll = async (req, res) => {
+
+interface BalanceParams {
+    balanceId: string;
+}
+export interface CreateBalanceDTO {
+    name: string;
+    balance: number;
+}
+export interface EditBalanceDTO {
+    balance: number;
+}
+
+const getAll = async (req: Request, res: Response) => {
     const result = await Balance.find();
     res.json(result);
 };
 
-const getById = async (req, res) => {
+const getById = async (req: Request<BalanceParams>, res: Response) => {
     const { balanceId } = req.params;
     const result = await Balance.findById(balanceId);
     if (!result) {
@@ -16,12 +29,12 @@ const getById = async (req, res) => {
     res.json(result);
 };
 
-const addBalance = async (req, res) => {
+const addBalance = async (req: Request<CreateBalanceDTO>, res: Response) => {
     const result = await Balance.create(req.body);
     res.status(201).json(result);
 };
 
-const deleteBalance = async (req, res) => {
+const deleteBalance = async (req: Request<BalanceParams>, res: Response<{ message: string }>) => {
     const { balanceId } = req.params;
     const result = await Balance.findByIdAndDelete(balanceId);
     if (!result) {
@@ -32,7 +45,7 @@ const deleteBalance = async (req, res) => {
     })
 };
 
-const updateBalance = async (req, res) => {
+const updateBalance = async (req: Request<BalanceParams, {}, EditBalanceDTO>, res: Response) => {
     const { balanceId } = req.params;
     const result = await Balance.findByIdAndUpdate(balanceId, req.body, {new: true});
     if (!result) {
@@ -41,7 +54,7 @@ const updateBalance = async (req, res) => {
     res.json(result);
 };
 
-const editBalance = async (req, res) => {
+const editBalance = async (req: Request<BalanceParams, {}, EditBalanceDTO>, res: Response) => {
     const { balanceId } = req.params;
     const result = await Balance.findByIdAndUpdate(balanceId, req.body, {new: true});
     if (!result) {
