@@ -5,6 +5,7 @@ import { balanceRouter } from './routes/api/balances/balances.ts';
 import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions.ts';
 import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions.ts';
 import * as mongoose from 'mongoose';
+import { tournamentsRouter } from './routes/api/tournaments/tournaments.ts';
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(cors());
 
 app.use('/api/balances', balanceRouter);
 app.use('/api/cash_sessions', cashSessionsRouter);
-app.use('/api/tournaments-sessions', tournamentsSessionsRouter);
+app.use('/api/tournament_sessions', tournamentsSessionsRouter);
+app.use('/api/tournament_sessions/:sessionId/tournaments', tournamentsRouter);
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   app.listen(process.env.PORT);

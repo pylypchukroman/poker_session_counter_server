@@ -1,4 +1,4 @@
-import { model, Schema, Document } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 
 export interface PokerRoomBalance {

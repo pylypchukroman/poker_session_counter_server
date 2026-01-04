@@ -31,3 +31,54 @@ patch:
     { "room": "GGPoker", "balance": 260 }
   ]
 }
+ TOURNAMENT SESSIONS
+
+ GET http://localhost:3000/api/tournament_sessions
+ BODY: -
+
+ GET http://localhost:3000/api/tournament_sessions/:sessionId
+ BODY: -
+
+ DELETE http://localhost:3000/api/tournament_sessions/:sessionId
+ BODY: -
+
+ POST http://localhost:3000/api/tournament_sessions/:sessionId
+ BODY:
+ {
+     "startedAt": "2025-12-26T07:00:00.000Z",
+     "status": "running"
+ }
+
+ PUT http://localhost:3000/api/tournament_sessions/:sessionId
+ BODY:
+{
+    "status": "finished"
+}
+
+ PATCH http://localhost:3000/api/tournament_sessions/:sessionId/finish_session
+ BODY:
+{
+    "finishedAt": "2025-12-26T07:00:01.000+00:00",
+    "status": "finished"
+}
+
+
+ALL TOURNAMENTS WILL BE ADD AND UPDATE ONE BY ONE
+
+ GET http://localhost:3000/api/tournament_sessions/:sessionId/tournaments
+ BODY: -
+
+ GET http://localhost:3000/api/tournament_sessions/:sessionId/tournaments/:tournamentId
+ BODY: -
+
+ DELETE http://localhost:3000/api/tournament_sessions/:sessionId/tournaments/:tournamentId
+ BODY: -
+
+ POST http://localhost:3000/api/tournament_sessions/:sessionId/tournaments
+ BODY:
+{
+    "name": "TEST",
+    "buyIn": 250,
+    "startedAt": "2024-12-18T06:15:00.000+00:00",
+    "status": "running"
+}
