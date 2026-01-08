@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
 export const tournamentSchema = Joi.object({
+  room: Joi.string().trim().min(1).required(),
+
   name: Joi.string().trim().min(1).required(),
 
   buyIn: Joi.number().positive().required(),
@@ -23,6 +25,8 @@ export const tournamentSchema = Joi.object({
 }).options({ allowUnknown: false });
 
 export const addTournamentSchema = Joi.object({
+  room: Joi.string().trim().min(1).required(),
+
   name: Joi.string().trim().min(1).required(),
 
   buyIn: Joi.number().positive().required(),
@@ -32,6 +36,8 @@ export const addTournamentSchema = Joi.object({
   status: Joi.string()
     .valid("running")
     .required(),
+
+  result: Joi.number().required(),
 }).options({ allowUnknown: false });
 
 export const finishTournamentSchema = Joi.object({

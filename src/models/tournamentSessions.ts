@@ -6,6 +6,7 @@ export type SessionStatus = "running" | "finished";
 
 export interface Tournament {
   _id: Types.ObjectId;
+  room: string
   name: string;
   buyIn: number;
   startedAt: Date;
@@ -23,6 +24,12 @@ export interface TournamentSession {
 
 export const tournamentSchema = new Schema<Tournament>(
   {
+    room: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+    },
     name: {
       type: String,
       required: true,
