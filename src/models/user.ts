@@ -1,13 +1,23 @@
 import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
 
-export interface User {
+import { Document } from 'mongoose';
+
+// export interface User {
+//   name: string;
+//   email: string;
+//   password: string;
+//   token?: string | null;
+// }
+
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
+  token?: string | null;
 }
 
-const userSchema = new Schema<User>(
+const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,
@@ -23,6 +33,10 @@ const userSchema = new Schema<User>(
       type: String,
       required: true,
     },
+    token: {
+      type: String,
+      default: null,
+    }
   },
   {
     toJSON: {

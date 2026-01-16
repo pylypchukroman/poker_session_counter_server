@@ -16,6 +16,10 @@ const balanceSchema = new Schema<Balance>(
       type: Number,
       required: true,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    }
   },
   {
     toJSON: {

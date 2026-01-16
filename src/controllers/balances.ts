@@ -16,7 +16,11 @@ export interface EditBalanceDTO {
 }
 
 const getAll = async (req: Request, res: Response) => {
-    const result = await Balance.find();
+    const { id: owner } = req.user;
+    //pagination
+    const { limit, page } = req.query;
+    const skip = page - 1 * limit;
+    const result = await Balance.find({ owner }, { skip, limit });
     res.json(result);
 };
 
@@ -30,7 +34,8 @@ const getById = async (req: Request<BalanceParams>, res: Response) => {
 };
 
 const addBalance = async (req: Request<CreateBalanceDTO>, res: Response) => {
-    const result = await Balance.create(req.body);
+    const { id } = req.user
+    const result = await Balance.create({...req.body, owner: id});
     res.status(201).json(result);
 };
 

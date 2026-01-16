@@ -3,8 +3,11 @@ import { isValidBalanceId } from '../../../middlewares/isValid.ts';
 import { validateBody } from '../../../middlewares/validateBody.ts';
 import { balanceSchema, editBalanceSchema } from '../../../schemas/balanceSchema.ts';
 import { balancesController } from '../../../controllers/balances.ts';
+import { autoriz } from '../../../middlewares/authendicate.ts';
 
 export const balanceRouter = Router();
+
+balanceRouter.use(autoriz);
 
 balanceRouter.get('/', balancesController.getAll);
 
