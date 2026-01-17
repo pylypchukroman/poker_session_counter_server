@@ -3,8 +3,11 @@ import { tournamentSessionsController } from '../../../controllers/tournamentSes
 import { isValidSessionId } from '../../../middlewares/isValid.ts';
 import { validateBody } from '../../../middlewares/validateBody.ts';
 import { addTournamentSchema, finishTournamentSchema } from '../../../schemas/tournamentSchema.ts';
+import { autoriz } from '../../../middlewares/authendicate.ts';
 
 export const tournamentsRouter = Router({ mergeParams: true });
+
+tournamentsRouter.use(autoriz);
 
 tournamentsRouter.get("/", tournamentSessionsController.getAllTournaments);
 

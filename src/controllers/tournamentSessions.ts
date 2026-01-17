@@ -24,7 +24,11 @@ export interface ITournamentSession {
 }
 
 const getAll = async (req, res) => {
-  const result = await TournamentSessions.find();
+  const { id: owner } = req.user;
+  if (!owner) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const result = await TournamentSessions.find({ owner });
   res.json(result);
 }
 
@@ -49,7 +53,11 @@ const deleteSession = async (req, res) => {
 };
 
 const addSession = async (req, res) => {
-  const result = await TournamentSessions.create(req.body);
+  const { id: owner } = req.user;
+  if (!owner) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const result = await TournamentSessions.create({...req.body, owner: owner});
   res.status(201).json(result);
 };
 
@@ -70,6 +78,9 @@ const editSession = async (req, res) => {
   }
   res.json(result);
 };
+
+
+
 
 const getAllTournaments = async (req, res) => {
   const { sessionId } = req.params;

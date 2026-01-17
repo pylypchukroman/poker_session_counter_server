@@ -15,6 +15,8 @@ export const tournamentSessionsSchema = Joi.object({
   tournaments: Joi.array()
     .items(tournamentSchema)
     .default([]),
+
+  owner: Joi.string()
 }).options({ allowUnknown: false });
 
 export const finishTournamentSessionSchema = Joi.object({

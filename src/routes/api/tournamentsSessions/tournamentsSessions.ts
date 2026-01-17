@@ -7,8 +7,11 @@ import {
   finishTournamentSessionSchema,
   tournamentSessionsSchema
 } from '../../../schemas/tournamentSessionsSchema.ts';
+import { autoriz } from '../../../middlewares/authendicate.ts';
 
 export const tournamentsSessionsRouter = Router();
+
+tournamentsSessionsRouter.use(autoriz);
 
 tournamentsSessionsRouter.get("/", tournamentSessionsController.getAll);
 

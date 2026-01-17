@@ -13,6 +13,7 @@ export interface Tournament {
   finishedAt: Date | null;
   status: TournamentStatus;
   result?: number;
+  owner?: string
 }
 
 export interface TournamentSession {
@@ -62,6 +63,10 @@ export const tournamentSchema = new Schema<Tournament>(
     result: {
       type: Number,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    }
   },
   {
     _id: true,
@@ -104,6 +109,10 @@ const tournamentSessionSchema = new Schema<TournamentSession>(
       type: [tournamentSchema],
       default: [],
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    }
   },
   {
     toJSON: {
