@@ -3,8 +3,11 @@ import { cashSessionsController } from '../../../controllers/cashSesions.ts';
 import { isValidSessionId } from '../../../middlewares/isValid.ts';
 import { validateBody } from '../../../middlewares/validateBody.ts';
 import { cashSessionsSchema, editCashSessionSchema } from '../../../schemas/cashSessionsSchema.ts';
+import { autoriz } from '../../../middlewares/authendicate.ts';
 
 export const cashSessionsRouter = Router();
+
+cashSessionsRouter.use(autoriz);
 
 cashSessionsRouter.get("/", cashSessionsController.getAll);
 

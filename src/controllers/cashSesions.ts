@@ -3,7 +3,11 @@ import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
 import { HttpError } from '../helpers/HttpError.ts';
 
 const getAll = async (req, res) => {
-  const result = await CashSessions.find();
+  const { id: owner } = req.user;
+  if (!owner) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const result = await CashSessions.find({ owner });
   res.json(result);
 }
 
@@ -28,7 +32,11 @@ const deleteSession = async (req, res) => {
 };
 
 const addSession = async (req, res) => {
-  const result = await CashSessions.create(req.body);
+  const { id: owner } = req.user;
+  if (!owner) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const result = await CashSessions.create({...req.body, owner: owner});
   res.status(201).json(result);
 };
 

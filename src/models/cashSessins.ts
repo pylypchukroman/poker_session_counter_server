@@ -46,6 +46,10 @@ const pokerSessionSchema = new Schema<PokerSession>(
       type: [pokerRoomBalanceSchema],
       default: [],
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    }
   },
   {
     toJSON: {

@@ -28,6 +28,7 @@ export const cashSessionsSchema = Joi.object({
       then: Joi.array().min(1).required(),
       otherwise: Joi.array().max(0).required(),
     }),
+  owner: Joi.string()
 })
   .options({ allowUnknown: false });
 
