@@ -30,7 +30,8 @@ export const login = async (req: any, res: any) => {
   }
   const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '5h' });
   const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '10h' });
-  await User.findByIdAndUpdate(user. id, { accessToken })
+  await User.findByIdAndUpdate(user.id, { token: accessToken });
+
   res.json({
     user: {
       email: user.email,

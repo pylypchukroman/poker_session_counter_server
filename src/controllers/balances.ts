@@ -20,7 +20,7 @@ const getAll = async (req: Request, res: Response) => {
     //pagination
     const { limit, page } = req.query;
     const skip = page - 1 * limit;
-    const result = await Balance.find({ owner }, { skip, limit });
+    const result = await Balance.find({ owner });
     res.json(result);
 };
 
@@ -34,8 +34,11 @@ const getById = async (req: Request<BalanceParams>, res: Response) => {
 };
 
 const addBalance = async (req: Request<CreateBalanceDTO>, res: Response) => {
-    const { id } = req.user
-    const result = await Balance.create({...req.body, owner: id});
+    const { id: owner } = req.user;
+    if (!owner) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    const result = await Balance.create({...req.body, owner: owner});
     res.status(201).json(result);
 };
 
