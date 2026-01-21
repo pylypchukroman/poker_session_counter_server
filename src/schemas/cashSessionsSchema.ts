@@ -1,48 +1,53 @@
 import Joi from "joi";
+import type { ObjectSchema } from 'joi';
+import type { CreateCashSessionPayload, EditCashSessionPayload, PokerRoomBalance } from '../types/types';
 
-const pokerRoomBalanceSchema = Joi.object({
-  name: Joi.string().trim().min(1).required(),
-  balance: Joi.number().min(0).required(),
-});
+export const pokerRoomBalanceSchema: ObjectSchema<PokerRoomBalance> =
+  Joi.object<PokerRoomBalance>({
+    name: Joi.string().trim().min(1).required(),
+    balance: Joi.number().min(0).required(),
+  });
 
-export const cashSessionsSchema = Joi.object({
-  startedAt: Joi.date().required(),
 
-  finishedAt: Joi.date()
-    .greater(Joi.ref("startedAt"))
-    .allow(null),
+export const cashSessionsSchema: ObjectSchema<CreateCashSessionPayload> =
+  Joi.object<CreateCashSessionPayload>({
+    startedAt: Joi.date().required(),
 
-  status: Joi.string()
-    .valid("running", "finished")
-    .required(),
+    finishedAt: Joi.date()
+      .greater(Joi.ref('startedAt'))
+      .allow(null),
 
-  balancesStart: Joi.array()
-    .items(pokerRoomBalanceSchema)
-    .min(1)
-    .required(),
+    status: Joi.string()
+      .valid('running', 'finished')
+      .required(),
 
-  balancesEnd: Joi.array()
-    .items(pokerRoomBalanceSchema)
-    .when("status", {
-      is: "finished",
-      then: Joi.array().min(1).required(),
-      otherwise: Joi.array().max(0).required(),
-    }),
-  owner: Joi.string()
-})
-  .options({ allowUnknown: false });
+    balancesStart: Joi.array()
+      .items(pokerRoomBalanceSchema)
+      .min(1)
+      .required(),
 
-export const editCashSessionSchema = Joi.object({
-  finishedAt: Joi.date()
-    .required(),
+    balancesEnd: Joi.array()
+      .items(pokerRoomBalanceSchema)
+      .when('status', {
+        is: 'finished',
+        then: Joi.array().min(1).required(),
+        otherwise: Joi.array().max(0).required(),
+      }),
 
-  status: Joi.string()
-    .valid("finished")
-    .required(),
+    owner: Joi.string(),
+  }).options({ allowUnknown: false });
 
-  balancesEnd: Joi.array()
-    .items(pokerRoomBalanceSchema)
-    .min(1)
-    .required(),
 
-}).options({ allowUnknown: false });
+export const editCashSessionSchema: ObjectSchema<EditCashSessionPayload> =
+  Joi.object<EditCashSessionPayload>({
+    finishedAt: Joi.date().required(),
+
+    status: Joi.string()
+      .valid('finished')
+      .required(),
+
+    balancesEnd: Joi.array()
+      .items(pokerRoomBalanceSchema)
+      .min(1)
+      .required(),
+  }).options({ allowUnknown: false });

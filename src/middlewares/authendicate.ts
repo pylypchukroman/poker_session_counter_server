@@ -1,28 +1,36 @@
 import { HttpError } from '../helpers/HttpError.ts';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user.ts';
+import type { RequestHandler } from 'express';
+import type { RequestWithUser } from '../types/types';
 
-export const autoriz = async (req, res, next) => {
-  const { authorization } = req.headers;
+
+export const autoriz: RequestHandler = async (req, _res, next) => {
+  const authorization = req.headers.authorization;
+
   if (!authorization) {
-    throw HttpError(401, 'Not authorized');
+    return next(HttpError(401, 'Not authorized'));
   }
 
   const [bearer, token] = authorization.split(' ');
 
   if (bearer !== 'Bearer' || !token) {
-    throw HttpError(401, 'Not authorized');
+    return next(HttpError(401, 'Not authorized'));
   }
 
   try {
-    const { id } = await jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(id);
-    if (!token || !user.token || user.token !== token) {
-      next(HttpError(401, 'Not authorized'));
+    const { id } = jwt.verify(token, process.env.JWT_SECRET as string) as { id: string };
+
+    const user: User = await User.findById(id);
+
+    if (!user || !user.token || user.token !== token) {
+      return next(HttpError(401, 'Not authorized'));
     }
-    req.user = user;
+
+    (req as RequestWithUser).user = user;
+
+    next();
   } catch {
-    next(HttpError(401, 'Not authorized'))
+    return next(HttpError(401, 'Not authorized'));
   }
-  next();
-}
+};

@@ -1,27 +1,7 @@
 import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
 import { HttpError } from '../helpers/HttpError.ts';
 import { TournamentSessions } from '../models/tournamentSessions.ts';
-import { Types } from 'mongoose';
-
-export type TournamentStatus = "running" | "finished";
-
-export interface Tournament {
-  _id: Types.ObjectId;
-  name: string;
-  buyIn: number;
-  startedAt: Date;
-  finishedAt: Date | null;
-  status: TournamentStatus;
-  result?: number;
-}
-
-export interface ITournamentSession {
-  _id: Types.ObjectId;
-  startedAt: Date;
-  finishedAt: Date | null;
-  status: "running" | "finished";
-  tournaments: Tournament[];
-}
+import type { TournamentSession } from '../types/types';
 
 const getAll = async (req, res) => {
   const { id: owner } = req.user;
@@ -58,6 +38,7 @@ const addSession = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
   const result = await TournamentSessions.create({...req.body, owner: owner});
+  console.log(result)
   res.status(201).json(result);
 };
 
@@ -85,7 +66,7 @@ const editSession = async (req, res) => {
 const getAllTournaments = async (req, res) => {
   const { sessionId } = req.params;
 
-  const session = await TournamentSessions.findById(sessionId);
+  const session: TournamentSession = await TournamentSessions.findById(sessionId);
   if (!session) {
     return res.status(404).json({ message: "Session not found" });
   }
@@ -95,7 +76,7 @@ const getAllTournaments = async (req, res) => {
 
 const getTournamentById = async (req, res) => {
   const { sessionId, tournamentId } = req.params;
-  const session = await TournamentSessions.findById(sessionId);
+  const session: TournamentSession = await TournamentSessions.findById(sessionId);
   if (!session) {
     return res.status(404).json({ message: "Session not found" });
   }
@@ -105,12 +86,12 @@ const getTournamentById = async (req, res) => {
 
 const deleteTournament = async (req, res) => {
   const { sessionId, tournamentId } = req.params;
-  const session = await TournamentSessions.findById(sessionId);
+  const session = await TournamentSessions.findById(sessionId) as any;
   if (!session) {
     return res.status(404).json({ message: "Session not found" });
   }
   const index = session.tournaments.findIndex(
-    t => t._id.toString() === tournamentId
+    t => t.id.toString() === tournamentId
   );
 
   if (index === -1) {
@@ -124,7 +105,7 @@ const deleteTournament = async (req, res) => {
 const addTournament = async (req, res) => {
   const { sessionId } = req.params;
   const body = req.body;
-  const session = await TournamentSessions.findById(sessionId);
+  const session = await TournamentSessions.findById(sessionId) as any;
   if (!session) {
     return res.status(404).json({ message: "Session not found" });
   }
@@ -135,7 +116,7 @@ const addTournament = async (req, res) => {
 
 const editTournament = async (req, res) => {
   const { sessionId, tournamentId } = req.params;
-  const session = await TournamentSessions.findById(sessionId);
+  const session = await TournamentSessions.findById(sessionId) as any;
   if (!session) {
     throw HttpError(404, "Session not found");
   }
@@ -147,7 +128,7 @@ const editTournament = async (req, res) => {
   tournament.status = req.body.status;
   tournament.result = req.body.result;
 
-  await session.save();
+  await session.save()
 
   res.json(tournament);
 };

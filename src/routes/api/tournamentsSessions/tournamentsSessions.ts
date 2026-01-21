@@ -8,6 +8,7 @@ import {
   tournamentSessionsSchema
 } from '../../../schemas/tournamentSessionsSchema.ts';
 import { autoriz } from '../../../middlewares/authendicate.ts';
+import type { EditTournamentSessionPayload, FinishTournamentSessionPayload } from '../../../types/types';
 
 export const tournamentsSessionsRouter = Router();
 
@@ -21,6 +22,6 @@ tournamentsSessionsRouter.delete("/:sessionId", isValidSessionId, tournamentSess
 
 tournamentsSessionsRouter.post("/", validateBody(tournamentSessionsSchema), tournamentSessionsController.addSession);
 
-tournamentsSessionsRouter.put("/:sessionId", isValidSessionId, validateBody(editTournamentSessionsSchema), tournamentSessionsController.updateSession);
+tournamentsSessionsRouter.put("/:sessionId", isValidSessionId, validateBody<EditTournamentSessionPayload>(editTournamentSessionsSchema), tournamentSessionsController.updateSession);
 
-tournamentsSessionsRouter.patch("/:sessionId/finish_session", isValidSessionId, validateBody(finishTournamentSessionSchema), tournamentSessionsController.editSession);
+tournamentsSessionsRouter.patch("/:sessionId/finish_session", isValidSessionId, validateBody<FinishTournamentSessionPayload>(finishTournamentSessionSchema), tournamentSessionsController.editSession);

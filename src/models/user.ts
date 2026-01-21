@@ -1,23 +1,8 @@
 import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
+import type { User } from '../types/types';
 
-import { Document } from 'mongoose';
-
-// export interface User {
-//   name: string;
-//   email: string;
-//   password: string;
-//   token?: string | null;
-// }
-
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-  token?: string | null;
-}
-
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<User>(
   {
     name: {
       type: String,

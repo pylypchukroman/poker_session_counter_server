@@ -1,6 +1,4 @@
-interface HttpErrorType extends Error {
-  status: number;
-}
+import type { HttpErrorType } from '../types/types';
 
 export const HttpError = (status: number, message: string) => {
   const error = new Error(message) as HttpErrorType;

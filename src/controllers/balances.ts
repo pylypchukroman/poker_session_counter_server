@@ -2,22 +2,10 @@ import { Balance } from '../models/balance.ts';
 import { HttpError } from '../helpers/HttpError.ts';
 import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
 import type { Request, Response } from "express";
-
-
-interface BalanceParams {
-    balanceId: string;
-}
-export interface CreateBalanceDTO {
-    name: string;
-    balance: number;
-}
-export interface EditBalanceDTO {
-    balance: number;
-}
+import type { BalanceParams, CreateBalanceDTO, EditBalanceDTO } from '../types/types';
 
 const getAll = async (req: Request, res: Response) => {
     const { id: owner } = req.user;
-    //pagination
     const { limit, page } = req.query;
     const skip = page - 1 * limit;
     const result = await Balance.find({ owner });

@@ -1,27 +1,24 @@
 import { HttpError } from '../helpers/HttpError.ts';
 import { isValidObjectId } from 'mongoose';
-import type { Request, Response, NextFunction } from "express";
+import type { RequestHandler } from 'express';
+import type { BalanceParams, SessionParams } from '../types/types';
 
-interface BalanceParams {
-  balanceId: string;
-}
-
-interface SessionParams {
-  sessionId: string;
-}
-
-export const isValidBalanceId = (req: Request<BalanceParams>, res: Response, next: NextFunction) => {
+export const isValidBalanceId: RequestHandler<BalanceParams> = (req, _res, next) => {
   const { balanceId } = req.params;
+
   if (!isValidObjectId(balanceId)) {
-    next(HttpError(400, `${balanceId} is not valid id`));
+    return next(HttpError(400, `${balanceId} is not valid id`));
   }
+
   next();
 };
 
-export const isValidSessionId = (req: Request<SessionParams>, res: Response, next: NextFunction) => {
+export const isValidSessionId: RequestHandler<SessionParams> = (req, _res, next) => {
   const { sessionId } = req.params;
+
   if (!isValidObjectId(sessionId)) {
-    next(HttpError(400, `${sessionId} is not valid id`));
+    return next(HttpError(400, `${sessionId} is not valid id`));
   }
+
   next();
 };

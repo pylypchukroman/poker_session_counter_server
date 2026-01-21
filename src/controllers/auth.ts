@@ -4,7 +4,7 @@ import { HttpError } from '../helpers/HttpError.ts';
 import * as bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
-export const register = async (req: any, res: any) => {
+export const register = async (req, res) => {
   const { email, password }: {email: string, password: string} = req.body;
   const user = await User.findOne({ email });
   if (user) {
@@ -15,7 +15,7 @@ export const register = async (req: any, res: any) => {
   res.status(201).json({ userEmail, name });
 }
 
-export const login = async (req: any, res: any) => {
+export const login = async (req, res) => {
   const { email, password }: any = req.body;
   if (!email || !password) {
     throw HttpError(400, 'Email and password are required');

@@ -4,6 +4,7 @@ import { validateBody } from '../../../middlewares/validateBody.ts';
 import { balanceSchema, editBalanceSchema } from '../../../schemas/balanceSchema.ts';
 import { balancesController } from '../../../controllers/balances.ts';
 import { autoriz } from '../../../middlewares/authendicate.ts';
+import type { BalancePayload, EditBalancePayload } from '../../../types/types';
 
 export const balanceRouter = Router();
 
@@ -17,6 +18,6 @@ balanceRouter.post('/', validateBody(balanceSchema), balancesController.addBalan
 
 balanceRouter.delete('/:balanceId',isValidBalanceId, balancesController.deleteBalance);
 
-balanceRouter.put('/:balanceId', isValidBalanceId, validateBody(balanceSchema), balancesController.updateBalance);
+balanceRouter.put('/:balanceId', isValidBalanceId, validateBody<BalancePayload>(balanceSchema), balancesController.updateBalance);
 
-balanceRouter.patch('/:balanceId/balance', isValidBalanceId, validateBody(editBalanceSchema), balancesController.editBalance);
+balanceRouter.patch('/:balanceId/balance', isValidBalanceId, validateBody<EditBalancePayload>(editBalanceSchema), balancesController.editBalance);

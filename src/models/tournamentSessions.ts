@@ -1,27 +1,6 @@
-import { model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
-
-export type TournamentStatus = "running" | "finished";
-export type SessionStatus = "running" | "finished";
-
-export interface Tournament {
-  _id: Types.ObjectId;
-  room: string
-  name: string;
-  buyIn: number;
-  startedAt: Date;
-  finishedAt: Date | null;
-  status: TournamentStatus;
-  result?: number;
-  owner?: string
-}
-
-export interface TournamentSession {
-  startedAt: Date;
-  finishedAt: Date | null;
-  status: SessionStatus;
-  tournaments: Tournament[];
-}
+import type { Tournament, TournamentSession } from '../types/types';
 
 export const tournamentSchema = new Schema<Tournament>(
   {

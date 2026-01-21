@@ -1,18 +1,6 @@
-import { Document, model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.ts';
-
-export interface PokerRoomBalance {
-  name: string;
-  balance: number;
-}
-
-export interface PokerSession extends Document {
-  startedAt: Date;
-  finishedAt: Date | null;
-  status: "running" | "finished";
-  balancesStart: PokerRoomBalance[];
-  balancesEnd: PokerRoomBalance[];
-}
+import type { PokerRoomBalance, PokerSession } from '../types/types';
 
 const pokerRoomBalanceSchema = new Schema<PokerRoomBalance>(
   {
