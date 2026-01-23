@@ -13,6 +13,6 @@ authRouter.post('/login', validateBody<LoginUserPayload>(loginUserSchema), authC
 
 authRouter.get('/logout', autoriz, authController.logout);
 
-authRouter.get('/refresh', authController.refreshToken);
+authRouter.post('/refresh', authController.refreshToken);
 
 // authRouter.get('/current', autoriz, authController.current);

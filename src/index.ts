@@ -7,11 +7,18 @@ import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tour
 import * as mongoose from 'mongoose';
 import { tournamentsRouter } from './routes/api/tournaments/tournaments.ts';
 import { authRouter } from './routes/auth/auth.ts';
+import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
 
 app.use('/api/balances', balanceRouter);
 app.use('/api/cash_sessions', cashSessionsRouter);

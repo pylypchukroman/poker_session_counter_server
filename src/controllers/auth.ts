@@ -28,9 +28,16 @@ export const login = async (req, res) => {
   if (!isPasswordSame) {
     throw HttpError(401, "Email or password wrong" );
   }
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '5h' });
-  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '10h' });
+  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '20s' });
+  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '1m' });
   await User.findByIdAndUpdate(user.id, { token: accessToken });
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: false, // для dev: false, для prod: true
+    sameSite: "strict",
+    maxAge: 2 * 60 * 1000, // 2 хвилини
+  });
 
   res.json({
     user: {
@@ -54,30 +61,39 @@ export const logout = async (req,res) => {
   await User.findByIdAndUpdate(id, { token: null });
   res.json({message: "Logout success"})
 }
+
+
 export const refreshToken = async (req, res) => {
-  const { authorization } = req.headers;
-  if (!authorization) {
-    throw HttpError(401, 'Not authorized');
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    throw HttpError(401, "Not authorized");
   }
 
-  const [bearer, token] = authorization.split(' ');
-
-  if (bearer !== 'Bearer' || !token) {
-    throw HttpError(401, 'Not authorized');
-  }
   try {
-    const { id } = await jwt.verify(token, process.env.JWT_SECRET);
-    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '5h' });
-    const refreshToken = jwt.sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '10h' });
+    const { id } = jwt.verify(refreshToken, process.env.JWT_SECRET);
+
+    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "20s" });
+    const newRefreshToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1m" });
+
     await User.findByIdAndUpdate(id, { token: accessToken });
+
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+      maxAge: 5 * 60 * 60 * 1000,
+    });
+
     res.json({
-      accessToken,
-      refreshToken
-    })
-  } catch {
-    throw HttpError(401, 'Not authorized');
+      tokens: {
+        accessToken,
+      },
+    });
+  } catch (err) {
+    throw HttpError(401, "Not authorized");
   }
-}
+};
+
 
 export const authController = {
   register: ctrlWrapper(register),

@@ -38,7 +38,6 @@ const addSession = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
   const result = await TournamentSessions.create({...req.body, owner: owner});
-  console.log(result)
   res.status(201).json(result);
 };
 
