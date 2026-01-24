@@ -1,6 +1,6 @@
-import { Balance } from '../models/balance.ts';
-import { HttpError } from '../helpers/HttpError.ts';
-import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
+import { Balance } from '../models/balance';
+import { HttpError } from '../helpers/HttpError';
+import { ctrlWrapper } from '../helpers/ctrlWrapper';
 import type { Request, Response } from "express";
 import type { BalanceParams, CreateBalanceDTO, EditBalanceDTO } from '../types/types';
 

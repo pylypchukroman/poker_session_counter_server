@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
-import { NextFunction } from 'express';
 
 export type TournamentStatus = "running" | "finished";
+
 export type SessionStatus = "running" | "finished";
 
 export type RegisterUserPayload = {
@@ -143,9 +143,6 @@ export interface HttpErrorType extends Error {
   status: number;
 }
 
-interface BalanceParams {
-  balanceId: string;
-}
 export interface CreateBalanceDTO {
   name: string;
   balance: number;

@@ -7,8 +7,8 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "ESNext",
-    "target": "ES2020",
+    "module": "CommonJS",
+    "target": "ES2022",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -23,6 +23,7 @@
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "noEmitOnError": false,
 
     // Style Options
     // "noImplicitReturns": true,
@@ -42,5 +43,8 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-  }
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+
 }

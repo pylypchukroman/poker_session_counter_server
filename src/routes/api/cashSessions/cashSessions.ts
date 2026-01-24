@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { cashSessionsController } from '../../../controllers/cashSesions.ts';
-import { isValidSessionId } from '../../../middlewares/isValid.ts';
-import { validateBody } from '../../../middlewares/validateBody.ts';
-import { cashSessionsSchema, editCashSessionSchema } from '../../../schemas/cashSessionsSchema.ts';
-import { autoriz } from '../../../middlewares/authendicate.ts';
+import { cashSessionsController } from '../../../controllers/cashSesions';
+import { isValidSessionId } from '../../../middlewares/isValid';
+import { validateBody } from '../../../middlewares/validateBody';
+import { cashSessionsSchema, editCashSessionSchema } from '../../../schemas/cashSessionsSchema';
+import { autoriz } from '../../../middlewares/authendicate';
 import type { CreateCashSessionPayload, EditCashSessionPayload } from '../../../types/types';
 
 export const cashSessionsRouter = Router();

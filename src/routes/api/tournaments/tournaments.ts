@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { tournamentSessionsController } from '../../../controllers/tournamentSessions.ts';
-import { isValidSessionId } from '../../../middlewares/isValid.ts';
-import { validateBody } from '../../../middlewares/validateBody.ts';
-import { addTournamentSchema, finishTournamentSchema } from '../../../schemas/tournamentSchema.ts';
-import { autoriz } from '../../../middlewares/authendicate.ts';
+import { tournamentSessionsController } from '../../../controllers/tournamentSessions';
+import { isValidSessionId } from '../../../middlewares/isValid';
+import { validateBody } from '../../../middlewares/validateBody';
+import { addTournamentSchema, finishTournamentSchema } from '../../../schemas/tournamentSchema';
+import { autoriz } from '../../../middlewares/authendicate';
 import type { AddTournamentPayload, FinishTournamentPayload } from '../../../types/types';
 
 export const tournamentsRouter = Router({ mergeParams: true });

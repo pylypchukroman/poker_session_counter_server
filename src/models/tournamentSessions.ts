@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError.ts';
+import { handleMongooseError } from '../helpers/handleMongooseError';
 import type { Tournament, TournamentSession } from '../types/types';
 
 export const tournamentSchema = new Schema<Tournament>(

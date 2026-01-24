@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { tournamentSchema } from './tournamentSchema.ts';
+import { tournamentSchema } from './tournamentSchema';
 import type { ObjectSchema } from 'joi';
 import type {
   CreateTournamentSessionPayload,

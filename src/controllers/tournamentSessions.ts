@@ -1,6 +1,6 @@
-import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
-import { HttpError } from '../helpers/HttpError.ts';
-import { TournamentSessions } from '../models/tournamentSessions.ts';
+import { ctrlWrapper } from '../helpers/ctrlWrapper';
+import { HttpError } from '../helpers/HttpError';
+import { TournamentSessions } from '../models/tournamentSessions';
 import type { TournamentSession } from '../types/types';
 
 const getAll = async (req, res) => {

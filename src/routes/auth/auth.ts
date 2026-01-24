@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { authController } from '../../controllers/auth.ts';
-import { validateBody } from '../../middlewares/validateBody.ts';
-import { loginUserSchema, registerUserSchema } from '../../schemas/authSchema.ts';
-import { autoriz } from '../../middlewares/authendicate.ts';
+import { authController } from '../../controllers/auth';
+import { validateBody } from '../../middlewares/validateBody';
+import { loginUserSchema, registerUserSchema } from '../../schemas/authSchema';
+import { autoriz } from '../../middlewares/authendicate';
 import type { RegisterUserPayload, LoginUserPayload } from '../../types/types';
 
 export const authRouter = Router();

@@ -1,19 +1,26 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
-import { balanceRouter } from './routes/api/balances/balances.ts';
-import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions.ts';
-import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions.ts';
+import { balanceRouter } from './routes/api/balances/balances';
+import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions';
+import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions';
 import * as mongoose from 'mongoose';
-import { tournamentsRouter } from './routes/api/tournaments/tournaments.ts';
-import { authRouter } from './routes/auth/auth.ts';
+import { tournamentsRouter } from './routes/api/tournaments/tournaments';
+import { authRouter } from './routes/auth/auth';
 import cookieParser from "cookie-parser";
+import { whitelist } from './data/whiteList';
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || whitelist.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );

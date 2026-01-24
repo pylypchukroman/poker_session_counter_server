@@ -1,6 +1,6 @@
 import { HttpError } from '../helpers/HttpError.ts';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/user.ts';
+import { User } from '../models/user';
 import type { RequestHandler } from 'express';
 import type { RequestWithUser } from '../types/types';
 

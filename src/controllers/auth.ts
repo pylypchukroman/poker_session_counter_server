@@ -1,10 +1,10 @@
-import { ctrlWrapper } from '../helpers/ctrlWrapper.ts';
-import { User } from '../models/user.ts';
-import { HttpError } from '../helpers/HttpError.ts';
+import { ctrlWrapper } from '../helpers/ctrlWrapper';
+import { User } from '../models/user';
+import { HttpError } from '../helpers/HttpError';
 import * as bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
-export const register = async (req, res) => {
+export const register = async (req: Request, res: Response) => {
   const { email, password }: {email: string, password: string} = req.body;
   const user = await User.findOne({ email });
   if (user) {
@@ -28,8 +28,8 @@ export const login = async (req, res) => {
   if (!isPasswordSame) {
     throw HttpError(401, "Email or password wrong" );
   }
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '20s' });
-  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '1m' });
+  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '12h' });
+  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '7d' });
   await User.findByIdAndUpdate(user.id, { token: accessToken });
 
   res.cookie("refreshToken", refreshToken, {
@@ -72,8 +72,8 @@ export const refreshToken = async (req, res) => {
   try {
     const { id } = jwt.verify(refreshToken, process.env.JWT_SECRET);
 
-    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "20s" });
-    const newRefreshToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1m" });
+    const accessToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "12h" });
+    const newRefreshToken = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     await User.findByIdAndUpdate(id, { token: accessToken });
 

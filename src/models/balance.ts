@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError.ts';
+import { handleMongooseError } from '../helpers/handleMongooseError';
 import type { Balance } from '../types/types';
 
 const balanceSchema = new Schema<Balance>(

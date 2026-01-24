@@ -1,4 +1,4 @@
-import { HttpError } from '../helpers/HttpError.ts';
+import { HttpError } from '../helpers/HttpError';
 import { isValidObjectId } from 'mongoose';
 import type { RequestHandler } from 'express';
 import type { BalanceParams, SessionParams } from '../types/types';

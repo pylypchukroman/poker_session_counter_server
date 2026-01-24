@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError.ts';
+import { handleMongooseError } from '../helpers/handleMongooseError';
 import type { User } from '../types/types';
 
 const userSchema = new Schema<User>(
@@ -11,7 +11,6 @@ const userSchema = new Schema<User>(
     email: {
       type: String,
       required: true,
-      // match: /^\w+@\w+\.[a-z]{2, 4}$/,
       unique: true
     },
     password: {
