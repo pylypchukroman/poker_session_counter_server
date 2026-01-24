@@ -11,7 +11,6 @@ import cookieParser from "cookie-parser";
 import { whitelist } from './data/whiteList.js';
 
 const app = express();
-console.log("MONGO URI starts with:", process.env.MONGODB_URI?.slice(0, 30));
 
 app.use(
   cors({
@@ -33,6 +32,7 @@ app.use('/api/cash_sessions', cashSessionsRouter);
 app.use('/api/tournament_sessions', tournamentsSessionsRouter);
 app.use('/api/tournament_sessions/:sessionId/tournaments', tournamentsRouter);
 app.use('/api/auth', authRouter);
+
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   app.listen(process.env.PORT);
