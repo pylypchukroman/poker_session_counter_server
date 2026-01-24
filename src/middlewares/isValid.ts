@@ -1,7 +1,7 @@
-import { HttpError } from '../helpers/HttpError';
+import { HttpError } from '../helpers/HttpError.js';
 import { isValidObjectId } from 'mongoose';
 import type { RequestHandler } from 'express';
-import type { BalanceParams, SessionParams } from '../types/types';
+import type { BalanceParams, SessionParams } from '../types/types.js';
 
 export const isValidBalanceId: RequestHandler<BalanceParams> = (req, _res, next) => {
   const { balanceId } = req.params;

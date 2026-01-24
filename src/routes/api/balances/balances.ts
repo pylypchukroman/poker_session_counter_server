@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { isValidBalanceId } from '../../../middlewares/isValid';
-import { validateBody } from '../../../middlewares/validateBody';
-import { balanceSchema, editBalanceSchema } from '../../../schemas/balanceSchema';
-import { balancesController } from '../../../controllers/balances';
-import { autoriz } from '../../../middlewares/authendicate';
-import type { BalancePayload, EditBalancePayload } from '../../../types/types';
+import { isValidBalanceId } from '../../../middlewares/isValid.js';
+import { validateBody } from '../../../middlewares/validateBody.js';
+import { balanceSchema, editBalanceSchema } from '../../../schemas/balanceSchema.js';
+import { balancesController } from '../../../controllers/balances.js';
+import { autoriz } from '../../../middlewares/authendicate.js';
+import type { BalancePayload, EditBalancePayload } from '../../../types/types.js';
 
 export const balanceRouter = Router();
 

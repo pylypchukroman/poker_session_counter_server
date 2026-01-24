@@ -1,14 +1,14 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
-import { balanceRouter } from './routes/api/balances/balances';
-import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions';
-import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions';
+import { balanceRouter } from './routes/api/balances/balances.js';
+import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions.js';
+import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions.js';
 import * as mongoose from 'mongoose';
-import { tournamentsRouter } from './routes/api/tournaments/tournaments';
+import { tournamentsRouter } from './routes/api/tournaments/tournaments.js';
 import { authRouter } from './routes/auth/auth.js';
 import cookieParser from "cookie-parser";
-import { whitelist } from './data/whiteList';
+import { whitelist } from './data/whiteList.js';
 
 const app = express();
 console.log("MONGO URI starts with:", process.env.MONGODB_URI?.slice(0, 30));

@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { tournamentSessionsController } from '../../../controllers/tournamentSessions';
-import { isValidSessionId } from '../../../middlewares/isValid';
-import { validateBody } from '../../../middlewares/validateBody';
-import { addTournamentSchema, finishTournamentSchema } from '../../../schemas/tournamentSchema';
-import { autoriz } from '../../../middlewares/authendicate';
-import type { AddTournamentPayload, FinishTournamentPayload } from '../../../types/types';
+import { tournamentSessionsController } from '../../../controllers/tournamentSessions.js';
+import { isValidSessionId } from '../../../middlewares/isValid.js';
+import { validateBody } from '../../../middlewares/validateBody.js';
+import { addTournamentSchema, finishTournamentSchema } from '../../../schemas/tournamentSchema.js';
+import { autoriz } from '../../../middlewares/authendicate.js';
+import type { AddTournamentPayload, FinishTournamentPayload } from '../../../types/types.js';
 
 export const tournamentsRouter = Router({ mergeParams: true });
 

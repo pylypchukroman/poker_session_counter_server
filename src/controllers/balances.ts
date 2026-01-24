@@ -1,8 +1,8 @@
-import { Balance } from '../models/balance';
-import { HttpError } from '../helpers/HttpError';
-import { ctrlWrapper } from '../helpers/ctrlWrapper';
+import { Balance } from '../models/balance.js';
+import { HttpError } from '../helpers/HttpError.js';
+import { ctrlWrapper } from '../helpers/ctrlWrapper.js';
 import type { Request, Response } from "express";
-import type { BalanceParams, CreateBalanceDTO, EditBalanceDTO } from '../types/types';
+import type { BalanceParams, CreateBalanceDTO, EditBalanceDTO } from '../types/types.js';
 
 const getAll = async (req: Request, res: Response) => {
     const { id: owner } = req.user;

@@ -1,4 +1,4 @@
-import type { HttpErrorType } from '../types/types';
+import type { HttpErrorType } from '../types/types.js';
 
 export const HttpError = (status: number, message: string) => {
   const error = new Error(message) as HttpErrorType;

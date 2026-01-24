@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import type { ObjectSchema } from 'joi';
-import type { BalancePayload, EditBalancePayload } from '../types/types';
+import type { BalancePayload, EditBalancePayload } from '../types/types.js';
 
 export const balanceSchema: ObjectSchema<BalancePayload> =
   Joi.object<BalancePayload>({

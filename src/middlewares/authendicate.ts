@@ -1,8 +1,8 @@
 import { HttpError } from '../helpers/HttpError.ts';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/user';
+import { User } from '../models/user.js';
 import type { RequestHandler } from 'express';
-import type { RequestWithUser } from '../types/types';
+import type { RequestWithUser } from '../types/types.js';
 
 
 export const autoriz: RequestHandler = async (req, _res, next) => {

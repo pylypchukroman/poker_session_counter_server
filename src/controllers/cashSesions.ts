@@ -1,6 +1,6 @@
-import { CashSessions } from '../models/cashSessins';
-import { ctrlWrapper } from '../helpers/ctrlWrapper';
-import { HttpError } from '../helpers/HttpError';
+import { CashSessions } from '../models/cashSessins.js';
+import { ctrlWrapper } from '../helpers/ctrlWrapper.js';
+import { HttpError } from '../helpers/HttpError.js';
 
 const getAll = async (req, res) => {
   const { id: owner } = req.user;

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import type { ObjectSchema } from 'joi';
-import type { LoginUserPayload, RegisterUserPayload } from '../types/types';
+import type { LoginUserPayload, RegisterUserPayload } from '../types/types.js';
 
 export const registerUserSchema: ObjectSchema<RegisterUserPayload> =
   Joi.object<RegisterUserPayload>({

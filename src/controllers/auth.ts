@@ -1,6 +1,6 @@
-import { ctrlWrapper } from '../helpers/ctrlWrapper';
-import { User } from '../models/user';
-import { HttpError } from '../helpers/HttpError';
+import { ctrlWrapper } from '../helpers/ctrlWrapper.js';
+import { User } from '../models/user.js';
+import { HttpError } from '../helpers/HttpError.js';
 import * as bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 

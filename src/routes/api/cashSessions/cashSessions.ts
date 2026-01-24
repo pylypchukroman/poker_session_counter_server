@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { cashSessionsController } from '../../../controllers/cashSesions';
-import { isValidSessionId } from '../../../middlewares/isValid';
-import { validateBody } from '../../../middlewares/validateBody';
-import { cashSessionsSchema, editCashSessionSchema } from '../../../schemas/cashSessionsSchema';
-import { autoriz } from '../../../middlewares/authendicate';
-import type { CreateCashSessionPayload, EditCashSessionPayload } from '../../../types/types';
+import { cashSessionsController } from '../../../controllers/cashSesions.js';
+import { isValidSessionId } from '../../../middlewares/isValid.js';
+import { validateBody } from '../../../middlewares/validateBody.js';
+import { cashSessionsSchema, editCashSessionSchema } from '../../../schemas/cashSessionsSchema.js';
+import { autoriz } from '../../../middlewares/authendicate.js';
+import type { CreateCashSessionPayload, EditCashSessionPayload } from '../../../types/types.js';
 
 export const cashSessionsRouter = Router();
 

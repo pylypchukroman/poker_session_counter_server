@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
-import type { PokerRoomBalance, PokerSession } from '../types/types';
+import { handleMongooseError } from '../helpers/handleMongooseError.js';
+import type { PokerRoomBalance, PokerSession } from '../types/types.js';
 
 const pokerRoomBalanceSchema = new Schema<PokerRoomBalance>(
   {

@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
-import type { User } from '../types/types';
+import { handleMongooseError } from '../helpers/handleMongooseError.js';
+import type { User } from '../types/types.js';
 
 const userSchema = new Schema<User>(
   {

@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
-import type { Tournament, TournamentSession } from '../types/types';
+import { handleMongooseError } from '../helpers/handleMongooseError.js';
+import type { Tournament, TournamentSession } from '../types/types.js';
 
 export const tournamentSchema = new Schema<Tournament>(
   {

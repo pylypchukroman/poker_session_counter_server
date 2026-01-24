@@ -1,4 +1,4 @@
-import { HttpError } from '../helpers/HttpError';
+import { HttpError } from '../helpers/HttpError.js';
 import type { RequestHandler } from 'express';
 import type { ObjectSchema } from 'joi';
 import type { ParamsDictionary } from "express-serve-static-core";

@@ -1,7 +1,7 @@
-import { ctrlWrapper } from '../helpers/ctrlWrapper';
-import { HttpError } from '../helpers/HttpError';
-import { TournamentSessions } from '../models/tournamentSessions';
-import type { TournamentSession } from '../types/types';
+import { ctrlWrapper } from '../helpers/ctrlWrapper.js';
+import { HttpError } from '../helpers/HttpError.js';
+import { TournamentSessions } from '../models/tournamentSessions.js';
+import type { TournamentSession } from '../types/types.js';
 
 const getAll = async (req, res) => {
   const { id: owner } = req.user;

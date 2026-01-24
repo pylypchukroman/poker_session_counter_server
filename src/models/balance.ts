@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { handleMongooseError } from '../helpers/handleMongooseError';
-import type { Balance } from '../types/types';
+import { handleMongooseError } from '../helpers/handleMongooseError.js';
+import type { Balance } from '../types/types.js';
 
 const balanceSchema = new Schema<Balance>(
   {

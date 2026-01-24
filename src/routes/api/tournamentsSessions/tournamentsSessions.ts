@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { tournamentSessionsController } from '../../../controllers/tournamentSessions';
-import { isValidSessionId } from '../../../middlewares/isValid';
-import { validateBody } from '../../../middlewares/validateBody';
+import { tournamentSessionsController } from '../../../controllers/tournamentSessions.js';
+import { isValidSessionId } from '../../../middlewares/isValid.js';
+import { validateBody } from '../../../middlewares/validateBody.js';
 import {
   editTournamentSessionsSchema,
   finishTournamentSessionSchema,
   tournamentSessionsSchema
-} from '../../../schemas/tournamentSessionsSchema';
-import { autoriz } from '../../../middlewares/authendicate';
-import type { EditTournamentSessionPayload, FinishTournamentSessionPayload } from '../../../types/types';
+} from '../../../schemas/tournamentSessionsSchema.js';
+import { autoriz } from '../../../middlewares/authendicate.js';
+import type { EditTournamentSessionPayload, FinishTournamentSessionPayload } from '../../../types/types.js';
 
 export const tournamentsSessionsRouter = Router();
 

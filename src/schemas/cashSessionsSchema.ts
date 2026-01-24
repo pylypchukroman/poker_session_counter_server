@@ -1,6 +1,6 @@
 import Joi from "joi";
 import type { ObjectSchema } from 'joi';
-import type { CreateCashSessionPayload, EditCashSessionPayload, PokerRoomBalance } from '../types/types';
+import type { CreateCashSessionPayload, EditCashSessionPayload, PokerRoomBalance } from '../types/types.js';
 
 export const pokerRoomBalanceSchema: ObjectSchema<PokerRoomBalance> =
   Joi.object<PokerRoomBalance>({

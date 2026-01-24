@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import type { ObjectSchema } from 'joi';
-import type { AddTournamentPayload, CreateTournamentPayload, FinishTournamentPayload } from '../types/types';
+import type { AddTournamentPayload, CreateTournamentPayload, FinishTournamentPayload } from '../types/types.js';
 
 export const tournamentSchema: ObjectSchema<CreateTournamentPayload> =
   Joi.object<CreateTournamentPayload>({
