@@ -1,4 +1,4 @@
 export const whitelist = [
   process.env.CLIENT_URL,
-  "https://domain.com",
+  "https://poker-session-counter.onrender.com",
 ];
