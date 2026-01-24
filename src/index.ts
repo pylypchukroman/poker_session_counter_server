@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import { whitelist } from './data/whiteList';
 
 const app = express();
+console.log("MONGO URI starts with:", process.env.MONGODB_URI?.slice(0, 30));
 
 app.use(
   cors({
