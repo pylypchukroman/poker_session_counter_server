@@ -1,4 +1,4 @@
 export const whitelist = [
-  "http://localhost:5173",
+  process.env.CLIENT_URL,
   "https://domain.com",
 ];
