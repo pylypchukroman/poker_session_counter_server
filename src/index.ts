@@ -6,7 +6,7 @@ import { cashSessionsRouter } from './routes/api/cashSessions/cashSessions';
 import { tournamentsSessionsRouter } from './routes/api/tournamentsSessions/tournamentsSessions';
 import * as mongoose from 'mongoose';
 import { tournamentsRouter } from './routes/api/tournaments/tournaments';
-import { authRouter } from './routes/auth/auth';
+import { authRouter } from './routes/auth/auth.js';
 import cookieParser from "cookie-parser";
 import { whitelist } from './data/whiteList';
 
