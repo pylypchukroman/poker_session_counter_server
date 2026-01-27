@@ -70,7 +70,7 @@ src/
  ├── types/         # Shared TypeScript types
  ├── bcrypt.ts      # Password hashing & comparison logic
  └── index.ts       # Application entry point
-
+```
 
 ## Getting Started
 
@@ -85,6 +85,7 @@ src/
 git clone https://github.com/pylypchukroman/poker_session_counter_server.git
 cd poker_session_counter_server
 npm install
+```
 
 ### Environment Variables
 
@@ -94,19 +95,20 @@ Create a .env file in the root directory:
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+```
 
 ### Run the Server
 
 ```bash
 npm run dev
-
+```
 
 ### Optional: Production Build
 
 ```bash
 npm run build
 npm run start
-
+```
 
 ## What This Project Demonstrates
 
