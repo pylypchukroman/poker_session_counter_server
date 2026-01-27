@@ -15,4 +15,3 @@ authRouter.get('/logout', autoriz, authController.logout);
 
 authRouter.post('/refresh', authController.refreshToken);
 
-// authRouter.get('/current', autoriz, authController.current);
