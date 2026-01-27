@@ -1,84 +1,139 @@
-post:
-{
-  "balancesStart": [
-    { "room": "PokerStars", "balance": 150 },
-    { "room": "GGPoker", "balance": 300 }
-  ]
-}
+# Session-Based Balance Tracker – Backend
+
+## Overview
+
+This repository contains the backend service for **Session-Based Balance Tracker**, an application designed to track a player’s balance based on played sessions.
+
+The system supports multiple session types (e.g., cash-style and tournament-style sessions), calculating balance changes per session and maintaining a clear, auditable history of a player’s activity.
+
+The project is built as a **real-world–oriented backend**, focusing on clean API design, authentication, and scalability rather than demo-only functionality.
+
+---
+
+## Tech Stack
+
+- **Node.js** – runtime environment
+- **TypeScript** – type safety and maintainability
+- **Express.js** – REST API framework
+- **MongoDB** – persistent data storage
+- **JWT (JSON Web Tokens)** – authentication & authorization
+- **Joi** – request validation and schema enforcement
+
+---
+
+## Core Features
+
+- User authentication with JWT
+- Session tracking for different session types (cash-style, tournament-style)
+- Automatic balance calculation based on session history
+- RESTful API with predictable and consistent endpoints
+
+---
+
+## Authentication
+
+The application uses **JWT-based authentication** combined with **schema validation**.
+
+- Secure registration and login flow
+- Password hashing using bcrypt
+- JWT token issuance and verification
+- Protected routes via auth middleware
+
+All incoming requests are validated using **Joi schemas** before reaching controllers, ensuring data consistency and preventing invalid payloads from entering the business logic.
+
+---
+
+## API Design
+
+The API follows REST principles:
+
+- Clear resource-based routes
+- Predictable request/response structures
+- Proper HTTP status codes
+- Separation of concerns between controllers, services, and data access
+
+The backend is designed to be easily consumable by frontend clients (web or mobile).
+
+---
+
+## Project Structure
+
+```text
+src/
+ ├── controllers/   # Request handlers and response logic
+ ├── routes/        # API route definitions
+ ├── middlewares/   # Auth, validation, and request middleware
+ ├── models/        # MongoDB models
+ ├── schemas/       # Request/response validation schemas
+ ├── data/          # Static data and configuration (e.g. whitelists)
+ ├── helpers/       # Shared helper utilities
+ ├── types/         # Shared TypeScript types
+ ├── bcrypt.ts      # Password hashing & comparison logic
+ └── index.ts       # Application entry point
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- MongoDB instance (local or cloud)
+
+### Installation
+
+```bash
+git clone https://github.com/pylypchukroman/poker_session_counter_server.git
+cd poker_session_counter_server
+npm install
+
+### Environment Variables
+
+Create a .env file in the root directory:
+
+```bash
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+
+### Run the Server
+
+```bash
+npm run dev
 
 
-put:
-{
-  "startedAt": "2025-01-05T08:30:00Z",
-  "finishedAt": "2025-01-05T12:10:00Z",
-  "status": "finished",
-  "balancesStart": [
-    { "room": "PokerStars", "balance": 150 },
-    { "room": "GGPoker", "balance": 300 }
-  ],
-  "balancesEnd": [
-    { "room": "PokerStars", "balance": 220 },
-    { "room": "GGPoker", "balance": 260 }
-  ]
-}
+### Optional: Production Build
 
-patch:
-{
-  "finishedAt": "2025-01-05T12:10:00Z",
-  "status": "finished",
-  "balancesEnd": [
-    { "room": "PokerStars", "balance": 220 },
-    { "room": "GGPoker", "balance": 260 }
-  ]
-}
- TOURNAMENT SESSIONS
-
- GET http://localhost:3000/api/tournament_sessions
- BODY: -
-
- GET http://localhost:3000/api/tournament_sessions/:sessionId
- BODY: -
-
- DELETE http://localhost:3000/api/tournament_sessions/:sessionId
- BODY: -
-
- POST http://localhost:3000/api/tournament_sessions/:sessionId
- BODY:
- {
-     "startedAt": "2025-12-26T07:00:00.000Z",
-     "status": "running"
- }
-
- PUT http://localhost:3000/api/tournament_sessions/:sessionId
- BODY:
-{
-    "status": "finished"
-}
-
- PATCH http://localhost:3000/api/tournament_sessions/:sessionId/finish_session
- BODY:
-{
-    "finishedAt": "2025-12-26T07:00:01.000+00:00",
-    "status": "finished"
-}
+```bash
+npm run build
+npm run start
 
 
-ALL TOURNAMENTS WILL BE ADD AND UPDATE ONE BY ONE
+## What This Project Demonstrates
 
- GET http://localhost:3000/api/tournament_sessions/:sessionId/tournaments
- BODY: -
+This backend service is built with real-world backend patterns and focuses on maintainability, security, and scalability.
 
- GET http://localhost:3000/api/tournament_sessions/:sessionId/tournaments/:tournamentId
- BODY: -
+Key takeaways:
 
- DELETE http://localhost:3000/api/tournament_sessions/:sessionId/tournaments/:tournamentId
- BODY: -
+- **Real-world backend design** for a domain-specific application
+- **Secure authentication** using JWT
+- **Clean and maintainable API structure**
+- **Practical use of MongoDB** for session-based balance tracking
+- **Type-safe development** using TypeScript
 
- POST http://localhost:3000/api/tournament_sessions/:sessionId/tournaments
- BODY:
-{
-    "name": "TEST",
-    "buyIn": 250,
-    "startedAt": "2024-12-18T06:15:00.000+00:00",
-    "status": "running"
-}
+Although the project was originally created for session-based balance tracking in a poker context, the architecture is domain-agnostic and can be adapted to any session-based tracking use case.
+
+---
+
+## Future Improvements
+
+- Unit and integration tests
+- Dashboard
+- Advanced statistics and analytics
+- Dockerized deployment
+
+---
+
+## Author
+
+**Roman Pylypchuk**
+
+This project is part of a personal portfolio and was built to demonstrate backend engineering skills for real-world applications.
