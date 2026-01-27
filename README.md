@@ -71,6 +71,7 @@ src/
  ├── bcrypt.ts      # Password hashing & comparison logic
  └── index.ts       # Application entry point
 
+
 ## Getting Started
 
 ### Prerequisites
